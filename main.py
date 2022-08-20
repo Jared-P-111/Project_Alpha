@@ -38,7 +38,7 @@ while(True):
   
   imageData = sift_feature_match.findNeedle(screenshot)
 
-  #cv.imshow('Found Needle', imageData["image"])
+  cv.imshow('Found Needle', imageData["image"])
 
   #TIME TRACKING FOR FPS
   stamp = math.floor(1 / (time() - loop_time))
