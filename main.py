@@ -5,6 +5,9 @@ import math
 from time import time
 from Screen_capture import ScreenCapture
 from SIFT_BF_feature_match import SIFT_Brute_Feature_Match
+from m_and_k_tracking import MouseAndKeyTracking
+from template_match import TemplateMatch
+from Flann_feature_match import FeatureMatchFlann
 
 
 
@@ -13,8 +16,8 @@ screenCap = ScreenCapture(0, 2)
 print("Screen Capture ready. Press s to continue.")
 
 #INSTANCE SUITE (Select type) add Import
-# template_match = TemplateMatch('./images/needle.JPG')
-# flann_feature_match = FeatureMatchFlann("./images/needle.JPG")
+template_match = TemplateMatch('./images/needle.JPG')
+flann_feature_match = FeatureMatchFlann("./images/needle.JPG")
 sift_feature_match = SIFT_Brute_Feature_Match("./images/needle.JPG")
 
 #DISPLAY SCREENS INFO

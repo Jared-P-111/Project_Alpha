@@ -1,6 +1,6 @@
 import pyautogui
 import pydirectinput
-from time import sleep, time
+from time import sleep, time, perf_counter
 import os
 import json
 
@@ -38,7 +38,7 @@ def playActions(filename):
         data = json.load(jsonfile)
         
         for index, action in enumerate(data):
-            action_start_time = time()
+            action_start_time = perf_counter()
 
             # look for escape input to exit
             if action['button'] == 'Key.esc':
@@ -56,6 +56,9 @@ def playActions(filename):
             elif action['type'] == 'click':
                 pydirectinput.click(action['pos'][0], action['pos'][1])
                 print("click on {}".format(action['pos']))
+            elif action['type'] == 'pos':
+                pyautogui.moveTo(action['pos'][0], action['pos'][1])
+                print("Mouse moved to X: {}, Y: {}".format(action['pos'][0], action['pos'][1]))
 
             # then sleep until next action should occur
             try:
@@ -70,7 +73,7 @@ def playActions(filename):
                 raise Exception('Unexpected action ordering.')
 
             # adjust elapsed_time to account for our code taking time to run
-            elapsed_time -= (time() - action_start_time)
+            elapsed_time -= (perf_counter() - action_start_time)
             if elapsed_time < 0:
                 elapsed_time = 0
             print('sleeping for {}'.format(elapsed_time))
