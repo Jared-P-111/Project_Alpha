@@ -4,7 +4,6 @@ from time import sleep, time, perf_counter
 import os
 import json
 
-
 class PlayBackData:
 
     #CONSTANTS
@@ -46,11 +45,11 @@ class PlayBackData:
 
                 # perform the action
                 if action['type'] == 'keyDown':
-                    key = convertKey(action['button'])
+                    key = self.convertKey(action['button'])
                     pydirectinput.keyDown(key)
                     print("keyDown on {}".format(key))
                 elif action['type'] == 'keyUp':
-                    key = convertKey(action['button'])
+                    key = self.convertKey(action['button'])
                     pydirectinput.keyUp(key)
                     print("keyUp on {}".format(key))
                 elif action['type'] == 'click':
@@ -81,9 +80,7 @@ class PlayBackData:
 
 
     # convert pynput button keys into pydirectinput keys
-    # https://pynput.readthedocs.io/en/latest/_modules/pynput/keyboard/_base.html#Key
-    # https://pydirectinput.readthedocs.io/en/latest/keyboard.html
-    def convertKey(button):
+    def convertKey(self, button):
         PYNPUT_SPECIAL_CASE_MAP = {
             'alt_l': 'altleft',
             'alt_r': 'altright',
@@ -107,3 +104,6 @@ class PlayBackData:
             return PYNPUT_SPECIAL_CASE_MAP[cleaned_key]
 
         return cleaned_key
+
+playback = PlayBackData()
+playback.main()
