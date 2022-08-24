@@ -11,22 +11,19 @@ def main():
     countdownTimer()
     playActions("actions_test_01.json")
 
-
 def initializepydirectinput():
     # Initialized pydirectinput
     # https://pydirectinput.readthedocs.io/en/latest/introduction.html
     # When fail-safe mode is True, moving the mouse to the upper-left corner will abort your program.
     pyautogui.FAILSAFE = True
 
-
 def countdownTimer():
     # Countdown timer
     print("Starting", end="", flush=True)
-    for i in range(0, 10):
+    for i in range(0, 3):
         print(".", end="", flush=True)
         sleep(1)
     print("Go")
-
 
 def playActions(filename):
     # Read the file
@@ -40,9 +37,6 @@ def playActions(filename):
         # parse the json
         data = json.load(jsonfile)
         
-        # loop over each action
-        # Because we are not waiting any time before executing the first action, any delay before the initial
-        # action is recorded will not be reflected in the playback.
         for index, action in enumerate(data):
             action_start_time = time()
 
@@ -60,7 +54,7 @@ def playActions(filename):
                 pydirectinput.keyUp(key)
                 print("keyUp on {}".format(key))
             elif action['type'] == 'click':
-                pydirectinput.click(action['pos'][0], action['pos'][1], duration=0.25)
+                pydirectinput.click(action['pos'][0], action['pos'][1])
                 print("click on {}".format(action['pos']))
 
             # then sleep until next action should occur
