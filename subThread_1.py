@@ -1,15 +1,14 @@
-# example of stopping a custom thread class
 from time import sleep
 from threading import Thread
 from threading import Event
 from pynput import keyboard
 
 # custom thread class
-class CustomThread(Thread):
+class SubThread_KeyListener(Thread):
     # constructor
     def __init__(self, event):
         # call the parent constructor
-        super(CustomThread, self).__init__()
+        super(SubThread_KeyListener, self).__init__()
         # store the event
         self.event = event
  
@@ -27,7 +26,7 @@ class CustomThread(Thread):
 # create the event
 event = Event()
 # create a new thread
-thread = CustomThread(event)
+thread = SubThread_KeyListener(event)
 # start the new thread
 thread.start()
 
